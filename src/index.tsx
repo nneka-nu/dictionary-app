@@ -1,5 +1,19 @@
 import ReactDOM from 'react-dom';
-import './index.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import App from './components/App';
+import './index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+    },
+  },
+});
+
+ReactDOM.render(
+  <QueryClientProvider client={client}>
+    <App />
+  </QueryClientProvider>,
+  document.getElementById('root')
+);

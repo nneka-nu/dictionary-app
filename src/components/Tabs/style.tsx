@@ -5,11 +5,14 @@ export const tabsStyle = css`
   flex-direction: row;
   align-items: center;
   position: relative;
+  background: #f0f0f0;
 
   button {
     flex: 1;
     border: 0;
+    background: none;
     height: 41px;
+
     &:focus,
     &:active {
       color: darkgray;
