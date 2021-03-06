@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
+import { useAppDispatch } from '../../store';
+import { updateSearchTerm } from '../../store/searchTerm';
+import { addWordToHistory } from '../../store/history';
 import { formStyle } from './style';
 
 async function getDefinitions() {
@@ -15,9 +18,12 @@ export default function SearchForm() {
   const { status, data } = useQuery('definitions', getDefinitions, {
     enabled: false,
   });
+  const dispatch = useAppDispatch();
 
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    dispatch(updateSearchTerm(searchTerm));
+    dispatch(addWordToHistory(searchTerm));
   };
 
   if (data) {

@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { capitalCaseText } from '../../helpers';
 import { tabsStyle } from './style';
 
 type Props = {
@@ -19,17 +20,9 @@ export default function Tabs({ data, onTabClick }: Props) {
     }
   }, []);
 
-  const handleTabClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    let btnText = e.currentTarget.textContent || '';
-    btnText = (btnText && btnText.split(' ')[0]) || data[0].text;
-    btnText = btnText.toLowerCase();
-    const tab = btnText[0].toUpperCase() + btnText.slice(1);
-    console.log({ btnText });
-    const textIndex = data.findIndex(
-      (item) => item.text.toLowerCase() === btnText.toLowerCase()
-    );
-    const position = 100 * (textIndex / data.length);
-    console.log({ len: data.length, textIndex, position });
+  const handleTabClick = (tabIndex: number) => {
+    const tab = capitalCaseText(data[tabIndex].text);
+    const position = 100 * (tabIndex / data.length);
     setLineLeftPosition(`${position}%`);
     onTabClick(tab);
   };
@@ -39,11 +32,13 @@ export default function Tabs({ data, onTabClick }: Props) {
   return (
     <div className={tabsStyle} ref={parentRef}>
       {data.map((item, index) => {
-        const text = item.text.toLowerCase();
-        const capitalCaseText = text[0].toUpperCase() + text.slice(1);
         return (
-          <button key={index} type="button" onClick={handleTabClick}>
-            {capitalCaseText}{' '}
+          <button
+            key={index}
+            type="button"
+            onClick={() => handleTabClick(index)}
+          >
+            {capitalCaseText(item.text)}&nbsp;
             <span>{item.count >= 99 ? '(99+)' : `(${item.count})`}</span>
           </button>
         );
