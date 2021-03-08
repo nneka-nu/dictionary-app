@@ -18,14 +18,12 @@ export const tabsStyle = css`
       color: darkgray;
     }
   }
+`;
 
-  .line {
-    width: 50%;
-    height: 2px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    background: black;
-    transition: left 0.2s;
-  }
+export const lineStyle1 = css`
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  background: black;
+  transition: left 0.2s;
 `;

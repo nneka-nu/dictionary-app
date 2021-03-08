@@ -1,28 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from '../../store';
 import Tabs from '../Tabs';
 import { listStyle } from './style';
 
-enum TabHeadings {
-  history = 'history',
-  vocab = 'vocab',
-}
-
 export default function WordsList() {
-  const [activeTab, setActiveTab] = useState<TabHeadings>(TabHeadings.history);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
   const history = useAppSelector((state) => state.history);
   const vocab = useAppSelector((state) => state.vocab);
-  const tabData = [
-    { text: TabHeadings.history, count: history.length },
-    { text: TabHeadings.vocab, count: vocab.length },
-  ];
+  const tabData = useMemo(() => {
+    return [
+      { label: 'history', count: history.length },
+      { label: 'vocab', count: vocab.length },
+    ];
+  }, [history.length, vocab.length]);
 
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab.toLowerCase() as TabHeadings);
+  const handleTabClick = (tabIndex: number) => {
+    setActiveTabIndex(tabIndex);
   };
 
+  useEffect(() => {
+    if (vocab.length > 0) setActiveTabIndex(1);
+  }, [vocab]);
+
   const ListItem = () => {
-    const words = activeTab === TabHeadings.history ? history : vocab;
+    const words = activeTabIndex === 0 ? history : vocab;
 
     return (
       <>
@@ -37,7 +38,11 @@ export default function WordsList() {
 
   return (
     <div>
-      <Tabs data={tabData} onTabClick={handleTabClick} />
+      <Tabs
+        activeTabIndex={activeTabIndex}
+        data={tabData}
+        onTabClick={handleTabClick}
+      />
       <ul className={listStyle}>
         <ListItem />
       </ul>

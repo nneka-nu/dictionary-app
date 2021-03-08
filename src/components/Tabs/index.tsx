@@ -1,31 +1,33 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { css, cx } from '@emotion/css';
 import { capitalCaseText } from '../../helpers';
-import { tabsStyle } from './style';
+import { lineStyle1, tabsStyle } from './style';
 
 type Props = {
+  activeTabIndex: number;
   data: {
-    text: string;
+    label: string;
     count: number;
   }[];
-  onTabClick: (tab: string) => void;
+  onTabClick: (tabIndex: number) => void;
 };
 
-export default function Tabs({ data, onTabClick }: Props) {
+export default function Tabs({ activeTabIndex, data, onTabClick }: Props) {
   const [componentWidth, setComponentWidth] = useState(0);
-  const [lineLeftPosition, setLineLeftPosition] = useState('0');
-
+  const [underlinePosition, setUnderlinePosition] = useState('0');
+  const lineStyle2 = css({
+    width: `${componentWidth / data.length}px`,
+    left: `${underlinePosition}`,
+  });
   const parentRef = useCallback((node: HTMLDivElement) => {
     if (node !== null) {
       setComponentWidth(node.getBoundingClientRect().width);
     }
   }, []);
 
-  const handleTabClick = (tabIndex: number) => {
-    const tab = capitalCaseText(data[tabIndex].text);
-    const position = 100 * (tabIndex / data.length);
-    setLineLeftPosition(`${position}%`);
-    onTabClick(tab);
-  };
+  useEffect(() => {
+    setUnderlinePosition(`${100 * (activeTabIndex / data.length)}%`);
+  }, [activeTabIndex, data.length]);
 
   if (data.length === 0) return null;
 
@@ -33,23 +35,13 @@ export default function Tabs({ data, onTabClick }: Props) {
     <div className={tabsStyle} ref={parentRef}>
       {data.map((item, index) => {
         return (
-          <button
-            key={index}
-            type="button"
-            onClick={() => handleTabClick(index)}
-          >
-            {capitalCaseText(item.text)}&nbsp;
+          <button key={index} type="button" onClick={() => onTabClick(index)}>
+            {capitalCaseText(item.label)}&nbsp;
             <span>{item.count >= 99 ? '(99+)' : `(${item.count})`}</span>
           </button>
         );
       })}
-      <div
-        className="line"
-        style={{
-          width: `${componentWidth / data.length}px`,
-          left: `${lineLeftPosition}`,
-        }}
-      ></div>
+      <div className={cx(lineStyle1, lineStyle2)} />
     </div>
   );
 }
