@@ -8,7 +8,7 @@ export const tabsStyle = css`
   background: #f0f0f0;
 
   button {
-    flex: 1;
+    flex: 1 0;
     border: 0;
     background: none;
     height: 41px;

@@ -16,7 +16,7 @@ export default function Tabs({ activeTabIndex, data, onTabClick }: Props) {
   const [componentWidth, setComponentWidth] = useState(0);
   const [underlinePosition, setUnderlinePosition] = useState('0');
   const lineStyle2 = css({
-    width: `${componentWidth / data.length}px`,
+    width: data.length > 0 ? `${componentWidth / data.length}px` : `0`,
     left: `${underlinePosition}`,
   });
   const parentRef = useCallback((node: HTMLDivElement) => {
