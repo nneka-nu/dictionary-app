@@ -10,7 +10,7 @@ export const appStyle = css`
   margin: 30px auto;
 
   .words-list {
-    min-width: 220px;
+    max-width: 220px;
   }
 
   .search {
