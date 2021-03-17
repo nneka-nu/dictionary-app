@@ -54,3 +54,9 @@ export const definitionsListStyle = css`
     font-size: 0.7rem;
   }
 `;
+
+export const wordnikAttrStyle = css`
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.9rem;
+`;

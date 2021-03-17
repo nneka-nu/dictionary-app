@@ -3,7 +3,11 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import { addWordToVocab } from '../../store/vocab';
 import { useDefinitionsQuery } from '../../api';
 import { capitalCaseText } from '../../helpers';
-import { definitionsStyle, definitionsListStyle } from './style';
+import {
+  definitionsStyle,
+  definitionsListStyle,
+  wordnikAttrStyle,
+} from './style';
 
 export default function WordDefinitions() {
   const searchTerm = useAppSelector((state) => state.searchTerm);
@@ -68,6 +72,12 @@ export default function WordDefinitions() {
               );
             })}
       </ul>
+      <a
+        className={wordnikAttrStyle}
+        href={`https://www.wordnik.com/words/${searchTerm}`}
+      >
+        {`https://www.wordnik.com/words/${searchTerm}`}
+      </a>
     </div>
   );
 }
