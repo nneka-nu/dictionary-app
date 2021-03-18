@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { useAppDispatch } from '../../store';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store';
 import { updateSearchTerm } from '../../store/searchTerm';
 import { addWordToHistory } from '../../store/history';
 import { formStyle } from './style';
 
 export default function SearchForm() {
   const [searchTerm, setSearchTerm] = useState('');
+  const globalSearchTerm = useAppSelector((state) => state.searchTerm);
   const dispatch = useAppDispatch();
 
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -13,6 +14,10 @@ export default function SearchForm() {
     dispatch(updateSearchTerm(searchTerm));
     dispatch(addWordToHistory(searchTerm));
   };
+
+  useEffect(() => {
+    setSearchTerm(globalSearchTerm);
+  }, [globalSearchTerm]);
 
   return (
     <form className={formStyle}>

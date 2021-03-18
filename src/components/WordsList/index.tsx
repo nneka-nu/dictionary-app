@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useAppSelector } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { addWordToHistory } from '../../store/history';
+import { updateSearchTerm } from '../../store/searchTerm';
 import Tabs from '../Tabs';
 import { listStyle } from './style';
 
 export default function WordsList() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const dispatch = useAppDispatch();
   const history = useAppSelector((state) => state.history);
   const vocab = useAppSelector((state) => state.vocab);
   const tabData = useMemo(() => {
@@ -18,6 +21,14 @@ export default function WordsList() {
     setActiveTabIndex(tabIndex);
   };
 
+  const handleWordClick = (word: string) => {
+    dispatch(updateSearchTerm(word));
+    if (activeTabIndex === 0) {
+      // Move word to the top of the History list
+      dispatch(addWordToHistory(word));
+    }
+  };
+
   useEffect(() => {
     if (vocab.length > 0) setActiveTabIndex(1);
   }, [vocab]);
@@ -29,7 +40,9 @@ export default function WordsList() {
       <>
         {words.map((word, index) => (
           <li key={index}>
-            <button type="button">{word}</button>
+            <button type="button" onClick={() => handleWordClick(word)}>
+              {word}
+            </button>
           </li>
         ))}
       </>
