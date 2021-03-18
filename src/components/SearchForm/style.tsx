@@ -6,11 +6,27 @@ export const formStyle = css`
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
+  position: relative;
 
   input {
-    padding: 8px 16px;
+    padding: 8px 30px 8px 16px;
     font-size: 1rem;
     flex: 1;
+  }
+
+  .clear-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 128px;
+
+    svg {
+      font-size: 1.6rem;
+    }
+
+    &:hover {
+      color: ${colors.hoverGray};
+    }
   }
 
   button[type='submit'] {

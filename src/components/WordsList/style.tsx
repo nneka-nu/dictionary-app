@@ -33,6 +33,9 @@ export const listStyle = css`
     &.delete {
       color: rgb(213, 56, 56);
       margin-left: 10px;
+      position: relative;
+      top: 0.5px;
+      left: 0;
 
       &:focus,
       &:active {
