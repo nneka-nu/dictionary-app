@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { colors } from '../../constants/styles';
 
 export const definitionsStyle = css`
   margin-top: 10px;
@@ -27,7 +28,7 @@ export const definitionsStyle = css`
 
       &:focus,
       &:active {
-        color: darkgray;
+        color: ${colors.hoverGray};
       }
     }
   }

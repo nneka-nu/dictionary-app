@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { colors } from '../../constants/styles';
 
 export const formStyle = css`
   display: flex;
@@ -16,13 +17,15 @@ export const formStyle = css`
     cursor: pointer;
     width: 115px;
     height: 41px;
-    background: black;
     border: none;
-    color: white;
-    font-size: 0.9rem;
+    color: ${colors.primaryWhite};
+    font-size: 0.95rem;
+    background: ${colors.primaryBlack};
+    text-transform: uppercase;
+    margin-left: 8px;
 
     &:hover {
-      color: darkgray;
+      color: ${colors.hoverGray};
     }
   }
 `;

@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { colors } from '../../constants/styles';
 
 export const tabsStyle = css`
   display: flex;
@@ -15,15 +16,15 @@ export const tabsStyle = css`
 
     &:focus,
     &:active {
-      color: darkgray;
+      color: ${colors.hoverGray};
     }
   }
 `;
 
 export const lineStyle1 = css`
-  height: 2px;
+  height: 5px;
   position: absolute;
   bottom: 0;
-  background: black;
+  background: #b3aa25;
   transition: left 0.2s;
 `;

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
 import { capitalCaseText } from '../../helpers';
 import { lineStyle1, tabsStyle } from './style';
@@ -15,14 +15,23 @@ type Props = {
 export default function Tabs({ activeTabIndex, data, onTabClick }: Props) {
   const [componentWidth, setComponentWidth] = useState(0);
   const [underlinePosition, setUnderlinePosition] = useState('0');
+  const parentRef = useRef<HTMLDivElement | null>(null);
   const lineStyle2 = css({
     width: data.length > 0 ? `${componentWidth / data.length}px` : `0`,
     left: `${underlinePosition}`,
   });
-  const parentRef = useCallback((node: HTMLDivElement) => {
-    if (node !== null) {
-      setComponentWidth(node.getBoundingClientRect().width);
-    }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (parentRef.current) {
+        setComponentWidth(parentRef.current.clientWidth);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
