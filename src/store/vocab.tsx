@@ -11,9 +11,12 @@ export const vobabSlice = createSlice({
         state.unshift(capitalizedText);
       }
     },
+    removeWordFromVocab: (state, action: PayloadAction<string>) => {
+      return state.filter((word) => word !== action.payload);
+    },
   },
 });
 
-export const { addWordToVocab } = vobabSlice.actions;
+export const { addWordToVocab, removeWordFromVocab } = vobabSlice.actions;
 
 export default vobabSlice.reducer;

@@ -6,7 +6,7 @@ export const tabsStyle = css`
   flex-direction: row;
   align-items: center;
   position: relative;
-  background: #f0f0f0;
+  background: #e1e1e1;
 
   button {
     flex: 1 0;

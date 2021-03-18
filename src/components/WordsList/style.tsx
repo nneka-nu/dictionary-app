@@ -18,14 +18,26 @@ export const listStyle = css`
   }
 
   button {
+    cursor: pointer;
     border: 0;
     background: none;
+    padding: 0;
     text-transform: uppercase;
     color: ${colors.primaryWhite};
 
     &:focus,
     &:active {
       color: ${colors.hoverGray};
+    }
+
+    &.delete {
+      color: rgb(213, 56, 56);
+      margin-left: 10px;
+
+      &:focus,
+      &:active {
+        color: rgba(213, 56, 56, 0.5);
+      }
     }
   }
 `;

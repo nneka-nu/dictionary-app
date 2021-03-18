@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { addWordToHistory } from '../../store/history';
+import { removeWordFromVocab } from '../../store/vocab';
 import { updateSearchTerm } from '../../store/searchTerm';
 import Tabs from '../Tabs';
 import { listStyle } from './style';
@@ -40,9 +41,23 @@ export default function WordsList() {
       <>
         {words.map((word, index) => (
           <li key={index}>
-            <button type="button" onClick={() => handleWordClick(word)}>
+            <button
+              type="button"
+              title="Search"
+              onClick={() => handleWordClick(word)}
+            >
               {word}
             </button>
+            {activeTabIndex === 1 && (
+              <button
+                type="button"
+                className="delete"
+                title="Delete"
+                onClick={() => dispatch(removeWordFromVocab(word))}
+              >
+                X
+              </button>
+            )}
           </li>
         ))}
       </>
