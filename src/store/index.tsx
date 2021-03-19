@@ -15,11 +15,13 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import activeTab from './activeTab';
 import searchTerm from './searchTerm';
 import history from './history';
 import vocab from './vocab';
 
 const reducer = combineReducers({
+  activeTab,
   searchTerm,
   history,
   vocab,
@@ -29,7 +31,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  blacklist: ['searchTerm'],
+  blacklist: ['activeTab', 'searchTerm'],
 };
 
 const store = configureStore({

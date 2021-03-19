@@ -3,12 +3,14 @@ import { css, cx } from '@emotion/css';
 import { capitalCaseText } from '../../helpers';
 import { lineStyle1, tabsStyle } from './style';
 
+export type TabInfo = {
+  label: string;
+  count: number;
+};
+
 type Props = {
   activeTabIndex: number;
-  data: {
-    label: string;
-    count: number;
-  }[];
+  data: TabInfo[];
   onTabClick: (tabIndex: number) => void;
 };
 

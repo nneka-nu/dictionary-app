@@ -8,11 +8,17 @@ import {
   definitionsListStyle,
   wordnikAttrStyle,
 } from './style';
+import { setActiveTab, WordsListTab } from '../../store/activeTab';
 
 export default function WordDefinitions() {
   const searchTerm = useAppSelector((state) => state.searchTerm);
   const dispatch = useAppDispatch();
   const { status, data, error, refetch } = useDefinitionsQuery(searchTerm);
+
+  const handleWordSave = () => {
+    dispatch(addWordToVocab(searchTerm));
+    dispatch(setActiveTab(WordsListTab.vocab));
+  };
 
   useEffect(() => {
     if (searchTerm) refetch();
@@ -45,10 +51,7 @@ export default function WordDefinitions() {
     <div className={definitionsStyle}>
       <header>
         <h1>{searchTerm && capitalCaseText(searchTerm)}</h1>
-        <button
-          type="button"
-          onClick={() => dispatch(addWordToVocab(searchTerm))}
-        >
+        <button type="button" onClick={handleWordSave}>
           Save Word
         </button>
       </header>
