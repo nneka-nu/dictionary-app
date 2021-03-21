@@ -55,32 +55,34 @@ export default function WordDefinitions() {
           Save Word
         </button>
       </header>
-      <ul className={definitionsListStyle}>
-        {data &&
-          data
-            .filter((item) => item.text && item.sourceDictionary !== 'century')
-            .map((item, index) => {
-              return (
-                <li key={index} className="row">
-                  <p>
-                    {item.partOfSpeech && (
-                      <span className="part-of-speech">
-                        {item.partOfSpeech}.&nbsp;
-                      </span>
-                    )}
-                    {item.text!.replace(/<[^>]*>/g, '')}
-                  </p>
-                  <span className="attribution">{item.attributionText}</span>
-                </li>
-              );
-            })}
-      </ul>
-      <a
-        className={wordnikAttrStyle}
-        href={`https://www.wordnik.com/words/${searchTerm}`}
-      >
-        {`https://www.wordnik.com/words/${searchTerm}`}
-      </a>
+      {data && data.length > 0 && (
+        <>
+          <ul className={definitionsListStyle}>
+            {data
+              .filter(
+                (item) => item.text && item.sourceDictionary !== 'century'
+              )
+              .map((item, index) => {
+                return (
+                  <li key={index} className="row">
+                    <p>
+                      {item.partOfSpeech && (
+                        <span className="part-of-speech">
+                          {item.partOfSpeech}.&nbsp;
+                        </span>
+                      )}
+                      {item.text!.replace(/<[^>]*>/g, '')}
+                    </p>
+                    <span className="attribution">{item.attributionText}</span>
+                  </li>
+                );
+              })}
+          </ul>
+          <a className={wordnikAttrStyle} href={`${data[0].wordnikUrl}`}>
+            {`${data[0].wordnikUrl}`}
+          </a>
+        </>
+      )}
     </div>
   );
 }

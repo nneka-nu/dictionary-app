@@ -8,6 +8,7 @@ type Definition = {
   partOfSpeech: string;
   sourceDictionary: string;
   text?: string;
+  wordnikUrl: string;
 };
 
 export const useDefinitionsQuery = (
