@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { capitalCaseText } from '../helpers';
+import { capitalCaseText } from '../helpers/common';
 
 export const vobabSlice = createSlice({
   name: 'vocab',

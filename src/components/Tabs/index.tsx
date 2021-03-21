@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { css, cx } from '@emotion/css';
-import { capitalCaseText } from '../../helpers';
+import { capitalCaseText } from '../../helpers/common';
 import { lineStyle1, tabsStyle } from './style';
 
 export type TabInfo = {

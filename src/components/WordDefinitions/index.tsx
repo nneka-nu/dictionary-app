@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { addWordToVocab } from '../../store/vocab';
 import { useDefinitionsQuery } from '../../api';
-import { capitalCaseText } from '../../helpers';
+import { capitalCaseText } from '../../helpers/common';
 import {
   definitionsStyle,
   definitionsListStyle,
