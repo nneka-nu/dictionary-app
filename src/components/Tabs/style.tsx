@@ -25,6 +25,6 @@ export const lineStyle1 = css`
   height: 5px;
   position: absolute;
   bottom: 0;
-  background: #b3aa25;
+  background: ${colors.primaryGold};
   transition: left 0.2s;
 `;
