@@ -1,3 +1,19 @@
+### Main packages
+
+This project uses TypeScript, Redux Toolkit, Redux Persist, React Query, Emotion, React Testing Library.
+
+### Features
+
+- Search for definitions of a word
+- Clear search field
+- Save words to vocabulary list
+- Remove words from vocabulary list
+- View history of words searched
+- History and vocabulary are saved to local storage
+- Tap on a word from history or vocab to search for definitions
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
